@@ -1,1 +1,134 @@
-abc
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f4f6;
+        margin: 0;
+        padding: 20px;
+      }
+      form {
+        max-width: 400px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      form input,
+      form select,
+      form button {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      form button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      form button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Login & Booking Form</h2>
+    <form id="bookingForm">
+      <input type="text" id="name" name="name" placeholder="Name" required />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Phone Number"
+        required
+      />
+      <input
+        type="text"
+        id="pickupAddress"
+        name="pickupAddress"
+        placeholder="Pickup Address"
+        required
+      />
+      <input
+        type="text"
+        id="dropoffAddress"
+        name="dropoffAddress"
+        placeholder="Drop-off Address"
+        required
+      />
+      <input type="date" id="pickupDate" name="pickupDate" required />
+      <input
+        type="number"
+        id="distance"
+        name="distance"
+        placeholder="Distance (in km)"
+        required
+      />
+      <input
+        type="text"
+        id="cost"
+        name="cost"
+        placeholder="Cost (calculated automatically)"
+        readonly
+      />
+      <button type="button" onclick="calculateCost()">Calculate Cost</button>
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      function calculateCost() {
+        const distance = document.getElementById("distance").value;
+        if (distance) {
+          const cost = distance * 10; // Example: $10 per km
+          document.getElementById("cost").value = `$${cost}`;
+        } else {
+          alert("Please enter the distance!");
+        }
+      }
+
+      document
+        .getElementById("bookingForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            pickupAddress: document.getElementById("pickupAddress").value,
+            dropoffAddress: document.getElementById("dropoffAddress").value,
+            pickupDate: document.getElementById("pickupDate").value,
+            distance: document.getElementById("distance").value,
+            cost: document.getElementById("cost").value,
+          };
+
+          const response = await fetch("http://localhost:3000/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          if (response.ok) {
+            alert("Form submitted successfully!");
+          } else {
+            alert("Error submitting the form!");
+          }
+        });
+    </script>
+  </body>
+</html>
