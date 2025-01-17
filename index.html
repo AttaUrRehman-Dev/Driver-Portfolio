@@ -1,68 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login & Booking Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f3f4f6;
-      margin: 0;
-      padding: 20px;
-    }
-    form {
-      max-width: 400px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    form input,
-    form button {
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    form button {
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    form button:hover {
-      background-color: #45a049;
-    }
-  </style>
-</head>
-<body>
-  <h2>Login & Booking Form</h2>
-  <form id="bookingForm" action="submit.php" method="POST">
-    <input type="text" id="name" name="name" placeholder="Name" required />
-    <input type="email" id="email" name="email" placeholder="Email" required />
-    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
-    <input type="text" id="pickupAddress" name="pickupAddress" placeholder="Pickup Address" required />
-    <input type="text" id="dropoffAddress" name="dropoffAddress" placeholder="Drop-off Address" required />
-    <input type="date" id="pickupDate" name="pickupDate" required />
-    <input type="number" id="distance" name="distance" placeholder="Distance (in km)" required />
-    <input type="text" id="cost" name="cost" placeholder="Cost (calculated automatically)" readonly />
-    <button type="button" onclick="calculateCost()">Calculate Cost</button>
-    <button type="submit">Submit</button>
-  </form>
-
-  <script>
-    function calculateCost() {
-      const distance = document.getElementById("distance").value;
-      if (distance) {
-        const cost = distance * 10; // Example: $10 per km
-        document.getElementById("cost").value = `$${cost}`;
-      } else {
-        alert("Please enter the distance!");
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Booking Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: rgb(53, 52, 52);
+        background-image: url(background.jpeg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0;
+        padding: 20px;
       }
-    }
-  </script>
-</body>
+      form {
+        max-width: 400px;
+        margin: auto;
+        background: transparent;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgb(248, 211, 4);
+      }
+      form input {
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      form button {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #692929;
+        border-radius: 5px;
+      }
+      form button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      form button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Login & Booking Form</h2>
+    <form id="bookingForm" action="submit.php" method="POST">
+      <input type="text" id="name" name="name" placeholder="Name" required />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Phone Number"
+        required
+      />
+      <input
+        type="text"
+        id="pickupAddress"
+        name="pickupAddress"
+        placeholder="Pickup Address"
+        required
+      />
+      <input
+        type="text"
+        id="dropoffAddress"
+        name="dropoffAddress"
+        placeholder="Drop-off Address"
+        required
+      />
+      <input type="date" id="pickupDate" name="pickupDate" required />
+      <input
+        type="number"
+        id="distance"
+        name="distance"
+        placeholder="Distance (in km)"
+        required
+      />
+      <input
+        type="text"
+        id="cost"
+        name="cost"
+        placeholder="Cost (calculated automatically)"
+        readonly
+      />
+      <button type="button" onclick="calculateCost()">Calculate Cost</button>
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      function calculateCost() {
+        const distance = document.getElementById("distance").value;
+        if (distance) {
+          const cost = distance * 10; // Example: $10 per km
+          document.getElementById("cost").value = `$${cost}`;
+        } else {
+          alert("Please enter the distance!");
+        }
+      }
+    </script>
+  </body>
 </html>
